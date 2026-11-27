@@ -1,29 +1,30 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Dashboard from './pages/Dashboard';
-import RepairService from './pages/RepairService';
-import BookRepair from './pages/BookRepair';
-import SpareParts from './pages/SpareParts';
+import Login from "./pages/user/Login";
+import Register from "./pages/user/Register";
+import Dashboard from "./pages/user/Dashboard";
+import RepairService from "./pages/user/RepairService";
+import BookRepair from "./pages/user/BookRepair";
+import SpareParts from "./pages/user/SpareParts";
+import UserLayout from "./pages/user/UserLayout";
 
 function App() {
-    return (
-        <BrowserRouter>
-            <Routes>
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Navigate to="/register" replace />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
 
-                <Route path="/" element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/repair-service" element={<RepairService />} />
-                <Route path="/book-repair" element={<BookRepair />} />
-                <Route path="/spare-parts" element={<SpareParts />} />
-
-            </Routes>
-        </BrowserRouter>
-    );
+        <Route element={<UserLayout />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/repairservice" element={<RepairService />} />
+          <Route path="/bookrepair" element={<BookRepair />} />
+          <Route path="/spareparts" element={<SpareParts />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
